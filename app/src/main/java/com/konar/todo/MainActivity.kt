@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
+    private val checkList = ArrayList<Pair<Int, Boolean>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +34,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnDelete.setOnClickListener {
             deleteTask(taskDao)
+        }
+
+        binding.btnChangeStatus.setOnClickListener {
+            changeStatus(taskDao)
         }
 
         lifecycleScope.launch {
@@ -64,15 +68,25 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun setChecked(id: Int, statusCheck: Boolean, taskDao: TaskDao) {
-        lifecycleScope.launch {
-            taskDao.setChecked(id, statusCheck)
-        }
+    private fun setChecked(id: Int, statusCheck: Boolean) {
+        checkList.add(Pair(id, statusCheck))
     }
 
     private fun deleteTask(taskDao: TaskDao) {
         lifecycleScope.launch {
+            for (i in checkList) {
+                taskDao.setChecked(i.first, i.second)
+            }
             taskDao.deleteSelected()
+        }
+    }
+
+    private fun changeStatus(taskDao: TaskDao) {
+        lifecycleScope.launch {
+            for (i in checkList) {
+                taskDao.setChecked(i.first, i.second)
+            }
+            taskDao.changeStatus("Completed","Not Yet Completed")
         }
     }
 
@@ -82,15 +96,18 @@ class MainActivity : AppCompatActivity() {
             val itemAdapter = TaskItemAdapter(
                 taskList,
                 { id, statusCheck ->
-                    setChecked(id, statusCheck, taskDao)
+                    setChecked(id, statusCheck)
                 }
             )
 
             binding.rvTaskList.layoutManager = LinearLayoutManager(this)
             binding.rvTaskList.adapter = itemAdapter
+            binding.tvNoTasks.visibility = View.GONE
             binding.rvTaskList.visibility = View.VISIBLE
+
         } else {
             binding.rvTaskList.visibility = View.GONE
+            binding.tvNoTasks.visibility = View.VISIBLE
         }
 
     }

@@ -27,4 +27,7 @@ interface TaskDao {
     @Query("delete from 'task-table' where isChecked=true")
     suspend fun deleteSelected()
 
+    @Query("update 'task-table' set status = case when status=:value2 then :value1 when status=:value1 then :value2 end where isChecked=true")
+    suspend fun changeStatus(value1: String, value2: String)
+
 }

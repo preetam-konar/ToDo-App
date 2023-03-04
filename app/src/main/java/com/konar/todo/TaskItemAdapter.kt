@@ -12,7 +12,7 @@ import com.konar.todo.db.TaskEntity
 
 class TaskItemAdapter(
     private val items: ArrayList<TaskEntity>,
-    private val setCheckedListener: (id: Int, isChecked: Boolean) -> Unit,
+    val setCheckedListener: (id: Int, isChecked: Boolean) -> Unit,
 ) :
     RecyclerView.Adapter<TaskItemAdapter.ViewHolder>() {
 
@@ -23,6 +23,8 @@ class TaskItemAdapter(
         val cbSelect = binding.cbSelect
         val tvPriority = binding.tvPriorityChoice
         val ivPriorityFlag = binding.ivPriorityFlag
+        val tvStatus = binding.tvStatus
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -41,14 +43,19 @@ class TaskItemAdapter(
         holder.tvTitle.text = item.title
         holder.tvDescription.text = item.desc
         holder.tvPriority.text = item.priority
+        holder.tvStatus.text = item.status
 
+        holder.cbSelect.setOnCheckedChangeListener(null)
 
-        holder.cbSelect.isChecked = false
         holder.cbSelect.isChecked = item.isChecked
 
-        holder.cbSelect.setOnCheckedChangeListener { _, isChecked ->
-            setCheckedListener.invoke(item.id, isChecked)
+        holder.cbSelect.setOnClickListener {
+            setCheckedListener.invoke(
+                item.id,
+                holder.cbSelect.isChecked
+            )
         }
+
 
         when (holder.tvPriority.text.toString()) {
             "High" -> {
@@ -71,6 +78,13 @@ class TaskItemAdapter(
                     ColorStateList.valueOf(Color.parseColor("#FFFF00"))
                 )
             }
+        }
+
+        if (holder.tvStatus.text == "Completed") {
+            ImageViewCompat.setImageTintList(
+                holder.ivPriorityFlag,
+                ColorStateList.valueOf(Color.parseColor("#00FF00"))
+            )
         }
 
 

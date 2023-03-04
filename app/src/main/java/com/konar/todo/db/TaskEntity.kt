@@ -20,5 +20,8 @@ data class TaskEntity(
     var priority: String = "Low",
 
     @ColumnInfo(name = "isChecked")
-    var isChecked: Boolean = false
+    var isChecked: Boolean = false,
+
+    @ColumnInfo(name = "Status")
+    var status: String = "Not Yet Completed"
 )
