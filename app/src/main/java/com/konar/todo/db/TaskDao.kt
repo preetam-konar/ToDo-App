@@ -30,4 +30,13 @@ interface TaskDao {
     @Query("update 'task-table' set status = case when status=:value2 then :value1 when status=:value1 then :value2 end where isChecked=true")
     suspend fun changeStatus(value1: String, value2: String)
 
+    @Query("select * from 'task-table' where isChecked=true")
+    fun fetchTaskByChecked(): Flow<List<TaskEntity>>
+
+    @Query("update 'task-table' set isChecked=true where id in (:ids)")
+    suspend fun setCheckedTrue(ids: ArrayList<Int>)
+
+    @Query("update 'task-table' set isChecked=false")
+    suspend fun setCheckedAllFalse()
+
 }

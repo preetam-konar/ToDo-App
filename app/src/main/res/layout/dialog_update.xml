@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_update_label"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Update Task"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title:"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/et_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/et_title" />
+
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:hint="Enter Title"
+        android:inputType="textCapSentences"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_desc_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_update_label" />
+
+    <TextView
+        android:id="@+id/tv_desc_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description:"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/et_desc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/et_desc" />
+
+    <EditText
+        android:id="@+id/et_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:hint="Enter Description"
+        android:inputType="textCapSentences|textImeMultiLine"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_desc_label"
+        app:layout_constraintTop_toBottomOf="@id/et_title" />
+
+    <TextView
+        android:id="@+id/tv_update_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:text="UPDATE"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tv_cancel"
+        app:layout_constraintEnd_toStartOf="@id/tv_cancel"
+        app:layout_constraintTop_toTopOf="@id/tv_cancel" />
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:text="CANCEL"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_priority_label" />
+
+    <TextView
+        android:id="@+id/tv_priority_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Priority: "
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/tv_desc_label"
+        app:layout_constraintTop_toBottomOf="@id/et_desc" />
+
+    <Spinner
+        android:id="@+id/sp_priority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/tv_priority_label"
+        app:layout_constraintStart_toStartOf="@id/et_desc"
+        app:layout_constraintTop_toTopOf="@id/tv_priority_label" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,7 @@ import com.konar.todo.db.TaskEntity
 
 class TaskItemAdapter(
     private val items: ArrayList<TaskEntity>,
-    val setCheckedListener: (id: Int, isChecked: Boolean) -> Unit,
+    val setCheckedListener: (id: Int, statusCheck: Boolean) -> Unit,
 ) :
     RecyclerView.Adapter<TaskItemAdapter.ViewHolder>() {
 
@@ -51,8 +51,7 @@ class TaskItemAdapter(
 
         holder.cbSelect.setOnClickListener {
             setCheckedListener.invoke(
-                item.id,
-                holder.cbSelect.isChecked
+                item.id, holder.cbSelect.isChecked
             )
         }
 
