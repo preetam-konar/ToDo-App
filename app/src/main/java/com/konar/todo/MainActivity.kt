@@ -101,6 +101,7 @@ class MainActivity : AppCompatActivity() {
             taskDao.setCheckedTrue(ArrayList(checkList))
             taskDao.deleteSelected()
         }
+        checkList.clear()
     }
 
     private fun changeStatus(taskDao: TaskDao) {
