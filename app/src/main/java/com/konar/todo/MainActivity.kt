@@ -1,8 +1,10 @@
 package com.konar.todo
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -79,8 +81,10 @@ class MainActivity : AppCompatActivity() {
             binding.etDesc.text.clear()
             Toast.makeText(this, "Task successfully entered!!", Toast.LENGTH_SHORT).show()
         } else {
-
-            Toast.makeText(this, "Task title can't be blank!!", Toast.LENGTH_SHORT).show()
+            binding.etTitle.requestFocus()
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(binding.etTitle, InputMethodManager.SHOW_IMPLICIT)
+            Toast.makeText(this, "Enter title...", Toast.LENGTH_SHORT).show()
         }
 
     }
